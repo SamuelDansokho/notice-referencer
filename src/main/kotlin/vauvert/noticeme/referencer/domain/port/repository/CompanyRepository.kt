@@ -5,5 +5,7 @@ import vauvert.noticeme.referencer.domain.utils.CompanyId
 
 interface CompanyRepository {
 
-    fun getCompany(companyId: CompanyId): Company
+    fun getAllCompanies() : List<Company>
+
+    fun getCompany(companyId: CompanyId): Company?
 }

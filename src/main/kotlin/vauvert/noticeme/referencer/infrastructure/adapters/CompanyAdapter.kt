@@ -4,11 +4,14 @@ import org.springframework.stereotype.Repository
 import vauvert.noticeme.referencer.domain.entity.Company
 import vauvert.noticeme.referencer.domain.port.repository.CompanyRepository
 import vauvert.noticeme.referencer.domain.utils.CompanyId
+import vauvert.noticeme.referencer.infrastructure.database.CompanyDatabaseAccess
 
 @Repository
-class CompanyAdapter : CompanyRepository {
+class CompanyAdapter(private val companyDatabaseAccess: CompanyDatabaseAccess) : CompanyRepository {
 
-    override fun getCompany(companyId: CompanyId): Company {
-        return Company("1", "Auchan")
-    }
+    override fun getAllCompanies(): List<Company> = companyDatabaseAccess.getAllCompanies()
+
+    override fun getCompany(companyId: CompanyId): Company =
+        requireNotNull(companyDatabaseAccess.getCompany(companyId)) { "There was an issue finding this company" }
+
 }

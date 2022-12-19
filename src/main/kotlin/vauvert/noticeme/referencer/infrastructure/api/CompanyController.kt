@@ -1,8 +1,10 @@
 package vauvert.noticeme.referencer.infrastructure.api
 
 import org.springframework.http.ResponseEntity
+import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 import vauvert.noticeme.referencer.domain.utils.CompanyId
 import vauvert.noticeme.referencer.infrastructure.service.CompanyService
@@ -10,9 +12,14 @@ import vauvert.noticeme.referencer.infrastructure.service.CompanyService
 @RestController("/company")
 class CompanyController(private val companyService: CompanyService) {
 
+    @GetMapping()
+    fun getAllCompaniesInfos() : ResponseEntity<Any> = ok(companyService.getAllCompanies())
+
+
     @GetMapping("/{companyId}")
     fun getCompany(@PathVariable("companyId") companyId: CompanyId): ResponseEntity<Any> {
         val response = companyService.getCompany(companyId)
         return ResponseEntity.ok(response)
     }
+
 }

@@ -1,9 +1,15 @@
 package vauvert.noticeme.referencer.domain.entity
 
-import vauvert.noticeme.referencer.domain.utils.CompanyId
-import vauvert.noticeme.referencer.domain.utils.CompanyName
+import vauvert.noticeme.referencer.domain.utils.*
 
 data class Company(
-    val companyId: CompanyId,
-    val companyName: CompanyName
+    val id: CompanyId,
+    val name: CompanyName,
+    val description: String,
+    val teamMembers : List<CompleteTeamMember>? = emptyList()
+)
+
+data class CompleteCompany(
+    val company : Company,
+    val companyContact: Contact
 )
