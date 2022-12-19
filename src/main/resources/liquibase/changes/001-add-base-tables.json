@@ -1,0 +1,20 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "001-add-base-tables",
+        "author": "referencer",
+        "changes": [
+          {
+            "sqlFile": {
+              "path": "../sql/001-add-base-tables.sql",
+              "relativeToChangelogFile": true,
+              "encoding": "utf8",
+              "stripComments": false
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
