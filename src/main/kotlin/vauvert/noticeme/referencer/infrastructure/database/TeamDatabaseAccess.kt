@@ -14,7 +14,7 @@ class TeamDatabaseAccess(private val namedParameterJdbcTemplate : NamedParameter
 
     fun getTeamMembers(companyId: CompanyId): List<TeamMember> {
         val sql = """
-           SELECT * FROM T_TEAM_MEMBERS WHERE TEAM_ID = :companyId 
+           SELECT * FROM REFERENCER.T_TEAM_MEMBERS WHERE TEAM_ID = :companyId 
         """
         val rowMapper = RowMapper { rs, _ ->
             TeamMember(

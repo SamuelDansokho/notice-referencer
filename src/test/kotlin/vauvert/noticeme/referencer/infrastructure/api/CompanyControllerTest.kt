@@ -47,6 +47,8 @@ class CompanyControllerTest {
             )
         )
     )
+    private val newCompany = NewCompany("New company name", "new company id")
+
 
     @Test
     fun `should return OK with a company`() {
@@ -84,6 +86,31 @@ class CompanyControllerTest {
         // Then
         assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
         assertThat(response.body).isEqualTo(inMemoryCompanies)
+    }
+
+    @Test
+    fun `should create a company and return OK with the company Id`() {
+        // Given
+        every { companyService.createCompany(any()) } returns CompanyCreationResponse.Success("new company id")
+
+        // When
+        val response = companyController.create(newCompany)
+
+        // Then
+        assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
+        assertThat(response.body).isEqualTo("new company id")
+    }
+
+    @Test
+    fun `should return UNPROCESSABLE_ENTITY if there was an issue during the creation of a company`() {
+        // Given
+        every { companyService.createCompany(any()) } returns CompanyCreationResponse.Failure
+
+        // When
+        val response = companyController.create(newCompany)
+
+        // Then
+        assertThat(response.statusCode).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY)
     }
 
 }

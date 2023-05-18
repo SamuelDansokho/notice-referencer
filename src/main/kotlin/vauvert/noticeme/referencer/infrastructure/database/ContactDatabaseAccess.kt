@@ -11,7 +11,7 @@ class ContactDatabaseAccess(private val namedParameterJdbcTemplate: NamedParamet
 
     fun getContact(contactId: ContactId): Contact? {
         val sql = """
-           SELECT * FROM T_CONTACT WHERE ID = :contactId 
+           SELECT * FROM REFERENCER.T_CONTACT WHERE ID = :contactId 
         """
         val result = namedParameterJdbcTemplate.query(sql, sqlParameterSource(contactId)) { rs, _ ->
             Contact(rs.getEmail(), rs.getAddress(), listOf(rs.getPrimaryPhone(), rs.getSecondaryPhone()))
